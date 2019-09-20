@@ -15,7 +15,6 @@ export default class Products extends Component {
         return res.json();
       })
       .then(products => {
-        console.log(products);
         this.setState({
           products
         });
@@ -28,8 +27,8 @@ export default class Products extends Component {
   items() {
     return this.state.products.map((item, i) => {
       return (
-        <div className='col-3'>
-          <Item item={item} key={i} />
+        <div className='col-3' key={i}>
+          <Item item={item} />
         </div>
       );
     });

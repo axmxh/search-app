@@ -25,14 +25,9 @@ mongoose
   });
 
 // Load Product model
-
 const Product = require('./model/Product');
-
+// PORT
 const PORT = process.env.PORT || 5000;
-
-app.get('/', (req, res) => {
-  res.send('Hello from Search app!');
-});
 
 app.get('/products', (req, res) => {
   Product.find().then(products => {
@@ -40,14 +35,12 @@ app.get('/products', (req, res) => {
       res.status(404).json({ msg: 'there are no products!' });
       return;
     }
-    //console.log(products);
     res.status(200).json(products);
   });
 });
 
 app.post('/products', (req, res) => {
   const term = req.query.q;
-  //console.log(req.query.q);
   Product.find({
     $text: { $search: term }
   }).then(products => {
@@ -55,7 +48,6 @@ app.post('/products', (req, res) => {
       res.status(404).json({ msg: 'there are no products!' });
       return;
     }
-    //console.log(products);
     res.status(200).json(products);
     console.log(products);
   });

@@ -13,13 +13,6 @@ class App extends Component {
     this.handleChang = this.handleChang.bind(this);
   }
 
-  reset() {
-    let fullProduct = this.changeState.current.state.products;
-    this.changeState.current.setState({
-      products: fullProduct
-    });
-  }
-
   handleChang(e) {
     let query = e.target.value;
     fetch(`http://localhost:5000/products?q=${query}`, {
