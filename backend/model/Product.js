@@ -11,5 +11,17 @@ const product = new Schema({
   },
   brand: String
 });
+product.index(
+  {
+    name: 'text',
+    brand: 'text'
+  },
+  {
+    weights: {
+      name: 5,
+      brand: 1
+    }
+  }
+);
 
 module.exports = mongoose.model('Product', product);
