@@ -15,7 +15,7 @@ class App extends Component {
 
   handleChang(e) {
     let query = e.target.value;
-    fetch(`http://localhost:5000/products?q=${query}`, {
+    fetch(`http://localhost:5000/?q=${query}`, {
       method: 'post',
       body: JSON.stringify({
         query

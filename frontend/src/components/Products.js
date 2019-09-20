@@ -10,7 +10,7 @@ export default class Products extends Component {
     };
   }
   componentDidMount() {
-    fetch('http://localhost:5000/products')
+    fetch('http://localhost:5000/')
       .then(res => {
         return res.json();
       })

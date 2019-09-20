@@ -29,7 +29,7 @@ const Product = require('./model/Product');
 // PORT
 const PORT = process.env.PORT || 5000;
 
-app.get('/products', (req, res) => {
+app.get('/', (req, res) => {
   Product.find().then(products => {
     if (!products) {
       res.status(404).json({ msg: 'there are no products!' });
@@ -39,7 +39,7 @@ app.get('/products', (req, res) => {
   });
 });
 
-app.post('/products', (req, res) => {
+app.post('/', (req, res) => {
   const term = req.query.q;
   Product.find({
     $text: { $search: term }
@@ -49,7 +49,6 @@ app.post('/products', (req, res) => {
       return;
     }
     res.status(200).json(products);
-    console.log(products);
   });
 });
 
