@@ -60,6 +60,14 @@ app.post('/', (req, res) => {
       }
       res.status(200).json(products);
     });
+  } else {
+    Product.find().then(products => {
+      if (!products) {
+        res.status(404).json({ msg: 'there are no products!' });
+        return;
+      }
+      res.status(200).json(products);
+    });
   }
 });
 
