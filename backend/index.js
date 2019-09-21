@@ -41,15 +41,26 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   const term = req.query.q;
-  Product.find({
-    $text: { $search: term }
-  }).then(products => {
-    if (!products) {
-      res.status(404).json({ msg: 'there are no products!' });
-      return;
-    }
-    res.status(200).json(products);
-  });
+  const cat = req.query.s;
+  if (term) {
+    Product.find({
+      $text: { $search: term }
+    }).then(products => {
+      if (!products) {
+        res.status(404).json({ msg: 'there are no products!' });
+        return;
+      }
+      res.status(200).json(products);
+    });
+  } else if (cat) {
+    Product.find({ 'category.id': cat }).then(products => {
+      if (!products) {
+        res.status(404).json({ msg: 'there are no products!' });
+        return;
+      }
+      res.status(200).json(products);
+    });
+  }
 });
 
 app.listen(PORT, () => {
